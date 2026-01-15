@@ -2,6 +2,7 @@
 // PARTIE 1 : FONCTION D'ÉCHANGE
 // ===================================
 
+<<<<<<< HEAD:1. Fondamentaux/5-bubble-sort.js
 // Cette fonction NE modifie PAS le tableau original
 function echanger(tableau, index1, index2) {
   const copie = [...tableau];
@@ -10,11 +11,19 @@ function echanger(tableau, index1, index2) {
   copie[index2] = temp;
   return copie;
 }
+=======
+// TODO : Créer une fonction qui échange deux éléments dans un tableau
+// Paramètres : tableau, index1, index2
+// Cette fonction ne modifie pas le tableau directement
+
+function echanger(tableau, index1, index2) {}
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/exercices/5-bubble-sort.js
 
 // ===================================
 // PARTIE 2 : TRI À BULLE - VERSION BASIQUE
 // ===================================
 
+<<<<<<< HEAD:1. Fondamentaux/5-bubble-sort.js
 function triABulle(tableau) {
   let resultat = [...tableau];
 
@@ -28,12 +37,20 @@ function triABulle(tableau) {
 
   return resultat;
 }
+=======
+// TODO : Créer une fonction triABulle qui trie un tableau de nombres
+// Paramètres : tableau (array de numbers)
+// Return : le tableau trié
+
+function triABulle(tableau) {}
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/exercices/5-bubble-sort.js
 
 // ===================================
 // PARTIE 3 : TRI À BULLE OPTIMISÉ
 // ===================================
 
 function triABulleOptimise(tableau) {
+<<<<<<< HEAD:1. Fondamentaux/5-bubble-sort.js
   let resultat = [...tableau];
   let echange;
 
@@ -53,6 +70,9 @@ function triABulleOptimise(tableau) {
   }
 
   return resultat;
+=======
+    // Votre code ici
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/exercices/5-bubble-sort.js
 }
 
 // ===================================

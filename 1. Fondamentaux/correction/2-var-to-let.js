@@ -5,7 +5,10 @@ function add(a, b) {
 
 function substract(a, b) {
   let result;
+<<<<<<< HEAD:1. Fondamentaux/2-var-to-let.js
 
+=======
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/correction/2-var-to-let.js
   if (a < b) {
     result = 0;
   } else {

@@ -3,11 +3,23 @@
 // ===================================
 
 const strategiesAire = {
+<<<<<<< HEAD:1. Fondamentaux/6-strategy.js
   // Rectangle : largeur × hauteur
   rectangle: (largeur, hauteur) => largeur * hauteur,
 
   // Carré : côté × côté
   carre: (cote) => cote * cote,
+=======
+  // TODO : Stratégie pour le rectangle
+  // Formule : largeur × hauteur
+  // Paramètres : largeur, hauteur
+  rectangle: (largeur, hauteur) => largeur * hauteur, // Remplacer null par une fonction
+
+  // TODO : Stratégie pour le carré
+  // Formule : côté × côté
+  // Paramètres : cote
+  carre: (cote) => Math.pow(cote, 2), // Remplacer null par une fonction
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/correction/6-strategy.js
 
   // Triangle : (base × hauteur) / 2
   triangle: (base, hauteur) => (base * hauteur) / 2,
@@ -25,6 +37,7 @@ const strategiesAire = {
 // ===================================
 
 function calculerAire(forme, ...dimensions) {
+<<<<<<< HEAD:1. Fondamentaux/6-strategy.js
   const strategie = strategiesAire[forme];
 
   if (!strategie) {
@@ -32,6 +45,19 @@ function calculerAire(forme, ...dimensions) {
   }
 
   return strategie(...dimensions);
+=======
+  // TODO : Vérifier si la forme existe dans strategiesAire
+  // TODO : Si la forme n'existe pas, retourner un message d'erreur
+  // TODO : Sinon, appeler la stratégie correspondante avec les dimensions
+
+  const aireFunc = strategiesAire[forme];
+  if (!aireFunc) {
+    console.log("Forme non accepté");
+    return;
+  }
+
+  return strategiesAire[forme](...dimensions);
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/correction/6-strategy.js
 }
 
 // ===================================
@@ -39,12 +65,22 @@ function calculerAire(forme, ...dimensions) {
 // ===================================
 
 function afficherResultat(forme, ...dimensions) {
+<<<<<<< HEAD:1. Fondamentaux/6-strategy.js
   const resultat = calculerAire(forme, ...dimensions);
 
   if (typeof resultat === "string") {
     console.log(resultat);
   } else {
     console.log(`L'aire du ${forme} est de ${resultat} unités²`);
+=======
+  // TODO : Appeler calculerAire
+  // TODO : Afficher le résultat de manière lisible
+  // Format suggéré : "L'aire du [forme] est de [resultat] unités²"
+
+  const result = calculerAire(forme, ...dimensions);
+  if (result != null) {
+    console.log(`L'aire du [${forme}] est de [${result}] unités²`);
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/correction/6-strategy.js
   }
 }
 
@@ -64,11 +100,19 @@ console.log("=== TESTS DU CALCULATEUR D'AIRES ===\n");
 
 // Test 1 : Rectangle
 console.log("Test 1 - Rectangle (5 × 3) :");
+<<<<<<< HEAD:1. Fondamentaux/6-strategy.js
+=======
+// TODO : Décommenter après avoir complété la fonction
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/correction/6-strategy.js
 afficherResultat("rectangle", 5, 3);
 console.log();
 
 // Test 2 : Carré
 console.log("Test 2 - Carré (côté = 4) :");
+<<<<<<< HEAD:1. Fondamentaux/6-strategy.js
+=======
+// TODO : Décommenter après avoir complété la fonction
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/correction/6-strategy.js
 afficherResultat("carre", 4);
 console.log();
 
@@ -89,7 +133,12 @@ console.log();
 
 // Test 6 : Forme inexistante
 console.log("Test 6 - Forme inexistante :");
+<<<<<<< HEAD:1. Fondamentaux/6-strategy.js
 console.log(calculerAire("pentagone", 5));
+=======
+// TODO : Décommenter après avoir complété la fonction
+afficherResultat("pentagone", 5);
+>>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/correction/6-strategy.js
 console.log();
 
 // ===================================
