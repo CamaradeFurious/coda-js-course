@@ -48,11 +48,7 @@ if (montantApresReduction > 50) {
 // ===================================
 // ÉTAPE 4 : CALCUL DU TOTAL FINAL
 // ===================================
-<<<<<<< HEAD:1. Fondamentaux/3-cart.js
 totalFinal = montantApresReduction + fraisDePort;
-=======
-//
->>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/exercices/3-cart.js
 
 // ===================================
 // AFFICHAGE DES RÉSULTATS

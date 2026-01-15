@@ -4,7 +4,6 @@ const originalConsole = {
   error: console.error.bind(console),
 };
 
-<<<<<<< HEAD:1. Fondamentaux/4-proxy-console.js
 function obtenirHorodatage() {
   const maintenant = new Date();
 
@@ -15,9 +14,6 @@ function obtenirHorodatage() {
 
   return `[${h}:${m}:${s}.${ms}]`;
 }
-=======
-function obtenirHorodatage() {}
->>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/exercices/4-proxy-console.js
 
 const consoleProxy = new Proxy(console, {
   get(target, prop) {
@@ -31,18 +27,10 @@ const consoleProxy = new Proxy(console, {
   },
 });
 
-<<<<<<< HEAD:1. Fondamentaux/4-proxy-console.js
 console.log = consoleProxy.log;
 console.warn = consoleProxy.warn;
 console.error = consoleProxy.error;
 
-=======
-// ===================================
-// TESTS
-// ===================================
-
-// Test de la méthode log
->>>>>>> dc22850fcc3a032b12910db828b8076593f0d5d2:1. Fondamentaux/exercices/4-proxy-console.js
 console.log("Ceci est un message d'information");
 console.warn("Attention, ceci est un avertissement");
 console.error("Une erreur s'est produite");
