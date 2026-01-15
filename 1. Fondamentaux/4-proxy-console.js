@@ -1,36 +1,38 @@
-// CONTEXTE :
-// Vous devez créer un système de logging personnalisé qui encapsule
-// les méthodes de console (log, warn, error) pour ajouter des fonctionnalités
-// supplémentaires comme l'horodatage et le formatage des messages.
-
-// ===================================
-// PARTIE 1 : FONCTION D'HORODATAGE
-// ===================================
-
-// TODO : Créer une fonction qui retourne l'heure actuelle au format HH:MM:SS
-// Exemple de retour : "[14:35:22]"
+const originalConsole = {
+  log: console.log.bind(console),
+  warn: console.warn.bind(console),
+  error: console.error.bind(console),
+};
 
 function obtenirHorodatage() {
-  // Votre code ici
+  const maintenant = new Date();
+
+  const h = String(maintenant.getHours()).padStart(2, "0");
+  const m = String(maintenant.getMinutes()).padStart(2, "0");
+  const s = String(maintenant.getSeconds()).padStart(2, "0");
+  const ms = String(maintenant.getMilliseconds()).padStart(3, "0");
+
+  return `[${h}:${m}:${s}.${ms}]`;
 }
 
-// ===================================
-// PARTIE 2 : CRÉATION DU PROXY CONSOLE
-// ===================================
+const consoleProxy = new Proxy(console, {
+  get(target, prop) {
+    if (["log", "warn", "error"].includes(prop)) {
+      return function (...args) {
+        const horodatage = obtenirHorodatage();
+        originalConsole[prop](horodatage, ...args);
+      };
+    }
+    return target[prop];
+  },
+});
 
-// ===================================
-// PARTIE 3 : MISE EN PLACE DU PROXY
-// ===================================
+console.log = consoleProxy.log;
+console.warn = consoleProxy.warn;
+console.error = consoleProxy.error;
 
-// ===================================
-// TESTS
-// ===================================
-
-// Test de la méthode log
 console.log("Ceci est un message d'information");
-
-// Test de la méthode warn
 console.warn("Attention, ceci est un avertissement");
-
-// Test de la méthode error
 console.error("Une erreur s'est produite");
+
+

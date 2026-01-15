@@ -1,47 +1,58 @@
-// CONTEXTE :
-// Le tri à bulle est un algorithme de tri simple qui parcourt répétitivement
-// le tableau, compare les éléments adjacents et les échange s'ils sont dans
-// le mauvais ordre. Le processus se répète jusqu'à ce que le tableau soit trié.
-
-// PRINCIPE :
-// 1. Parcourir le tableau de gauche à droite
-// 2. Comparer chaque paire d'éléments adjacents
-// 3. Si l'élément de gauche est plus grand que celui de droite, les échanger
-// 4. Répéter jusqu'à ce qu'aucun échange ne soit nécessaire
-
 // ===================================
 // PARTIE 1 : FONCTION D'ÉCHANGE
 // ===================================
 
-// TODO : Créer une fonction qui échange deux éléments dans un tableau
-// Paramètres : tableau, index1, index2
-// Cette fonction ne modifie pas le tableau directement
-
+// Cette fonction NE modifie PAS le tableau original
 function echanger(tableau, index1, index2) {
-  // Votre code ici
+  const copie = [...tableau];
+  const temp = copie[index1];
+  copie[index1] = copie[index2];
+  copie[index2] = temp;
+  return copie;
 }
 
 // ===================================
 // PARTIE 2 : TRI À BULLE - VERSION BASIQUE
 // ===================================
 
-// TODO : Créer une fonction triABulle qui trie un tableau de nombres
-// Paramètres : tableau (array de numbers)
-// Return : le tableau trié
-
 function triABulle(tableau) {
-  // Votre code ici
+  let resultat = [...tableau];
+
+  for (let i = 0; i < resultat.length - 1; i++) {
+    for (let j = 0; j < resultat.length - 1 - i; j++) {
+      if (resultat[j] > resultat[j + 1]) {
+        resultat = echanger(resultat, j, j + 1);
+      }
+    }
+  }
+
+  return resultat;
 }
 
 // ===================================
 // PARTIE 3 : TRI À BULLE OPTIMISÉ
 // ===================================
 
-// TODO : Créer une version optimisée qui s'arrête si aucun échange n'est effectué
-// (cela signifie que le tableau est déjà trié)
-
 function triABulleOptimise(tableau) {
-  // Votre code ici
+  let resultat = [...tableau];
+  let echange;
+
+  for (let i = 0; i < resultat.length - 1; i++) {
+    echange = false;
+
+    for (let j = 0; j < resultat.length - 1 - i; j++) {
+      if (resultat[j] > resultat[j + 1]) {
+        resultat = echanger(resultat, j, j + 1);
+        echange = true;
+      }
+    }
+
+    if (!echange) {
+      break;
+    }
+  }
+
+  return resultat;
 }
 
 // ===================================
@@ -53,7 +64,7 @@ console.log("=== TESTS DU TRI À BULLE ===\n");
 // Test 1 : Tableau désorganisé
 const tableau1 = [64, 34, 25, 12, 22, 11, 90];
 console.log("Tableau original :", tableau1);
-console.log("Tableau trié :", triABulle([...tableau1])); // [...tableau1] crée une copie
+console.log("Tableau trié :", triABulle([...tableau1]));
 console.log();
 
 // Test 2 : Tableau déjà trié
@@ -80,6 +91,5 @@ console.log();
 
 console.log("=== TESTS VERSION OPTIMISÉE ===\n");
 
-// Décommenter ces lignes une fois la fonction créée
-// const tableau5 = [64, 34, 25, 12, 22, 11, 90];
-// console.log("Avec optimisation :", triABulleOptimise([...tableau5]));
+const tableau5 = [64, 34, 25, 12, 22, 11, 90];
+console.log("Avec optimisation :", triABulleOptimise([...tableau5]));

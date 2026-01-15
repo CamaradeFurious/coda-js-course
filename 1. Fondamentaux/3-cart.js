@@ -1,7 +1,7 @@
 // DONNÉES DU PANIER
-const montantPanier = 120; // Montant initial du panier en euros
-const possedeCarteFidelite = true; // Le client a-t-il une carte de fidélité ?
-const estJourDeSoldes = false; // Sommes-nous un jour de soldes ?
+const montantPanier = 230; // Montant initial du panier en euros
+const possedeCarteFidelite = false; // Le client a-t-il une carte de fidélité ?
+const estJourDeSoldes = true; // Sommes-nous un jour de soldes ?
 
 // VARIABLES À CALCULER
 let reductionAppliquee = 0; // Pourcentage de réduction à appliquer
@@ -12,27 +12,43 @@ let totalFinal = 0; // Montant total final à payer
 // ===================================
 // ÉTAPE 1 : CALCUL DE LA MEILLEURE RÉDUCTION
 // ===================================
-// Règles :
-// - Carte de fidélité : -10%
-// - Jour de soldes : -20%
-// - Montant > 100€ : -5%
-// Les réductions ne se cumulent pas, prendre la meilleure
+
+// Carte de fidélité : -10%
+if (possedeCarteFidelite) {
+  reductionAppliquee = 10;
+}
+
+// Jour de soldes : -20%
+if (estJourDeSoldes && reductionAppliquee < 20) {
+  reductionAppliquee = 20;
+}
+
+// Montant > 100€ : -5%
+if (montantPanier > 100 && reductionAppliquee < 5) {
+  reductionAppliquee = 5;
+}
 
 // ===================================
 // ÉTAPE 2 : CALCUL DU MONTANT APRÈS RÉDUCTION
 // ===================================
+montantApresReduction =
+  montantPanier - (montantPanier * reductionAppliquee) / 100;
 
 // ===================================
 // ÉTAPE 3 : CALCUL DES FRAIS DE PORT
 // ===================================
-// Règles :
-// - Gratuit (0€) si achat > 50€
-// - 5€ si achat entre 20€ et 50€
-// - 8€ si achat < 20€
+if (montantApresReduction > 50) {
+  fraisDePort = 0;
+} else if (montantApresReduction >= 20) {
+  fraisDePort = 5;
+} else {
+  fraisDePort = 8;
+}
 
 // ===================================
 // ÉTAPE 4 : CALCUL DU TOTAL FINAL
 // ===================================
+totalFinal = montantApresReduction + fraisDePort;
 
 // ===================================
 // AFFICHAGE DES RÉSULTATS
