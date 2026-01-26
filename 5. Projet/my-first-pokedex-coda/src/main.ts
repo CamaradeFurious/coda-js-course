@@ -85,7 +85,6 @@ function renderTeam() {
           )
           .join("");
 
-  // Ajouter écoute sur suppr
   teamListContainer.querySelectorAll(".remove-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const name = (e.currentTarget as HTMLButtonElement).dataset.name!;
@@ -128,12 +127,12 @@ searchInput.addEventListener("input", () => {
     const search = searchInput.value.toLowerCase().trim();
 
     const filtered = allPokemon.filter((p) => {
-      const french = (p.nameFR || "").toLowerCase(); // nom français seulement
+      const french = (p.nameFR || "").toLowerCase(); 
       const idStr = p.id ? p.id.toString() : "";
 
       return (
-        french.includes(search) || // recherche sur nameFR
-        idStr === search           // recherche par ID
+        french.includes(search) || 
+        idStr === search           
       );
     });
 
@@ -143,7 +142,7 @@ searchInput.addEventListener("input", () => {
       detailContainer,
       shinySelect.value === "true"
     );
-  }, 400); // délai
+  }, 400); 
 });
 
 
