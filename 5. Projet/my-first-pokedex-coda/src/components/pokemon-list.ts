@@ -43,7 +43,6 @@ export async function renderPokemonList(
     const card = document.createElement("div");
     card.className = "pokemon-card";
 
-    // Génération HTML des types avec petites icônes
     const typesHTML = pokemon.types.map(t => `
       <span class="type-small ${t.type.name}">
         <img src="${typeIcons[t.type.name]}" alt="${t.type.name}">
