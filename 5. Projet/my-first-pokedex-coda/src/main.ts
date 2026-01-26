@@ -9,7 +9,6 @@ import { renderPokemonDetail } from "./components/pokemondetail";
 
 const listContainer = document.getElementById("pokemon-list")!;
 const detailContainer = document.getElementById("pokemon-detail")!;
-const specialContainer = document.getElementById("special-forms-container")!;
 const searchInput = document.getElementById("search") as HTMLInputElement;
 const genSelect = document.getElementById("gen-select") as HTMLSelectElement;
 const shinySelect = document.getElementById(
