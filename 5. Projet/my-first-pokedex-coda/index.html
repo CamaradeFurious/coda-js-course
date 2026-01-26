@@ -1,14 +1,49 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="steelsheet" type="text/css" href="stylei.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my-first-pokedex-coda</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokédex Français</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Pokédex</h1>
+
+    <div class="controls">
+      <input type="text" id="search" placeholder="Rechercher par nom ou ID...">
+      <select id="gen-select">
+        <option value="1">Génération 1</option>
+        <option value="2">Génération 2</option>
+        <option value="3">Génération 3</option>
+        <option value="4">Génération 4</option>
+        <option value="5">Génération 5</option>
+        <option value="6">Génération 6</option>
+        <option value="7">Génération 7</option>
+        <option value="8">Génération 8</option>
+        <option value="9">Génération 9</option>
+      </select>
+      <select id="shiny-select">
+        <option value="false">Normal</option>
+        <option value="true">Shiny</option>
+      </select>
+    </div>
+
+    <div id="pokemon-detail" data-current-id=""></div>
+
+    <div id="special-forms-container"></div>
+
+    <h2>Liste des Pokémon</h2>
+    <div id="pokemon-list"></div>
+
+    <h2>Créateur d’équipe</h2>
+    <div id="team-builder">
+      <div id="team-list"></div>
+      <button id="save-team">Sauvegarder l'équipe</button>
+      <button id="load-team">Charger l'équipe</button>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
 </html>

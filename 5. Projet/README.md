@@ -29,3 +29,27 @@ Utiliser la base fourni dans le dossier my-first-pokedex-coda, ou créer votre p
     - En tant que joueur
     Je veux voir les faiblesses de mon équipe
     Afin de corriger ma composition
+
+
+src/
+├─ api/
+│  └─ pokemonApi.ts
+├─ models/
+│  ├─ Pokemon.ts
+│  ├─ Team.ts
+│  └─ Ability.ts
+├─ services/
+│  ├─ pokedexService.ts
+│  ├─ teamService.ts
+│  └─ storageService.ts
+├─ components/
+│  ├─ PokemonList.ts
+│  ├─ PokemonCard.ts
+│  ├─ PokemonDetail.ts
+│  ├─ SearchBar.ts
+│  ├─ Filters.ts
+│  └─ TeamBuilder.ts
+├─ utils/
+│  └─ typeHelpers.ts
+├─ main.ts
+└─ style.css
