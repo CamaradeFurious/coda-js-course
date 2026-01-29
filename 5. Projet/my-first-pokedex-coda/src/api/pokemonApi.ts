@@ -33,7 +33,7 @@ export interface PokemonDetail {
   evolution?: Evolution[];
 }
 
-// Poké par génération
+
 export async function fetchPokemonByGeneration(
   genId: number
 ): Promise<PokemonListItem[]> {
@@ -79,7 +79,7 @@ async function fetchEvolutions(speciesUrl: string): Promise<Evolution[]> {
 }
 
 
-// Détail Pokémon (ROBUSTE)
+
 export async function fetchPokemonByName(
   nameOrId: string | number
 ): Promise<PokemonDetail> {
@@ -102,14 +102,12 @@ export async function fetchPokemonByName(
 
   const data = await res.json();
 
-  // Species
   const speciesRes = await fetch(data.species.url);
   const species = await speciesRes.json();
 
   const nameFR =
     species.names.find((n: any) => n.language.name === "fr")?.name || data.name;
 
-  // Sprites
   const sprites = {
     normal:
       data.sprites.other["official-artwork"]?.front_default ||
@@ -121,10 +119,9 @@ export async function fetchPokemonByName(
       "",
   };
 
-  // Cry
+
   const cryUrl = `https://play.pokemonshowdown.com/audio/cries/${data.name.toLowerCase()}.mp3`;
 
-  // Formes spéciales
   const specialForms: SpecialForm[] = [];
   if (species.name === "deoxys") {
     for (const v of species.varieties) {
@@ -172,7 +169,6 @@ export async function fetchPokemonByName(
     }
   }
 
-  // Evolutions
   const evolution = await fetchEvolutions(data.species.url);
 
   

@@ -1,7 +1,6 @@
 import type { PokemonDetail } from "../api/pokemonApi";
-import { fetchPokemonByName } from "../api/pokemonApi"; // API pour évolution
+import { fetchPokemonByName } from "../api/pokemonApi"; 
 
-// Traductions francophones
 const typeFR: Record<string, string> = {
   fire: "Feu", water: "Eau", grass: "Plante", electric: "Électrique",
   ice: "Glace", fighting: "Combat", poison: "Poison", ground: "Sol",
@@ -15,7 +14,6 @@ const statsFR: Record<string, string> = {
   speed: "Vitesse"
 };
 
-// Icônes de types
 const typeIcons: Record<string, string> = {
   fire: "https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/fire.svg",
   water: "https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/water.svg",

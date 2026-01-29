@@ -163,7 +163,7 @@ searchInput.addEventListener("input", () => {
   saveTeamBtn.addEventListener("click", saveTeam);
   loadTeamBtn.addEventListener("click", loadTeam);
 
-  // Navigation clavier
+  // Navigation clavier pour équipe à finir
   document.addEventListener("keydown", async (e) => {
     if (!currentDetail) return;
     if (e.key === "ArrowRight") await navigatePokemon("next");
