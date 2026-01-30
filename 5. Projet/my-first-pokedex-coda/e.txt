@@ -24,6 +24,7 @@ let timeout: number;
 let currentDetail: PokemonDetail | null = null;
 let team: PokemonDetail[] = [];
 
+// --- LOAD GENERATION ---
 async function loadGeneration(genId: number) {
   const list = await fetchPokemonByGeneration(genId);
 
@@ -50,11 +51,13 @@ async function loadGeneration(genId: number) {
   );
 }
 
+// --- POKEMON DETAIL ---
 async function showPokemonDetail(pokemon: PokemonDetail) {
   currentDetail = pokemon;
   renderPokemonDetail(pokemon, detailContainer, shinySelect.value === "true");
 }
 
+// --- NAVIGATION ---
 async function navigatePokemon(direction: "next" | "prev") {
   if (!currentDetail) return;
   const index = allPokemon.findIndex(
@@ -67,6 +70,7 @@ async function navigatePokemon(direction: "next" | "prev") {
   showPokemonDetail(nextDetail);
 }
 
+// --- RENDER TEAM ---
 function renderTeam() {
   teamListContainer.innerHTML =
     team.length === 0
@@ -79,7 +83,7 @@ function renderTeam() {
           shinySelect.value === "true" ? p.sprites.shiny : p.sprites.normal
         }">
         <p>#${p.id} ${p.nameFR}</p>
-        <button class="remove-btn" data-name="${p.nameFR}">Supprimer</button>
+        <button class="remove-btn" data-id="${p.id}">Supprimer</button>
       </div>
     `
           )
@@ -87,31 +91,44 @@ function renderTeam() {
 
   teamListContainer.querySelectorAll(".remove-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const name = (e.currentTarget as HTMLButtonElement).dataset.name!;
-      team = team.filter((p) => p.nameFR !== name);
+      const id = Number(
+        (e.currentTarget as HTMLButtonElement).dataset.id
+      );
+      team = team.filter((p) => p.id !== id);
       renderTeam();
     });
   });
 }
 
+// --- SAVE TEAM ---
 function saveTeam() {
-  localStorage.setItem("myTeam", JSON.stringify(team.map(p => ({ id: p.id, name: p.nameFR }))
-));
+  localStorage.setItem(
+    "myTeam",
+    JSON.stringify(team.map((p) => ({ id: p.id, name: p.nameFR })))
+  );
   alert("Équipe sauvegardée !");
 }
 
-async function loadTeam() {
+// --- LOAD TEAM ---
+async function loadTeam(auto = false) {
   const saved = localStorage.getItem("myTeam");
-  if (!saved) return alert("Aucune équipe sauvegardée !");
-  const names: string[] = JSON.parse(saved);
-  team = [];
-  for (const name of names) {
-    const detail = await fetchPokemonByName(name);
-    team.push(detail);
+  if (!saved) {
+    if (!auto) alert("Aucune équipe sauvegardée !");
+    renderTeam();
+    return;
   }
+
+  const savedPokemons: { id: number; name: string }[] = JSON.parse(saved);
+
+  const details = await Promise.all(
+    savedPokemons.map((p) => fetchPokemonByName(p.name))
+  );
+
+  team = details;
   renderTeam();
 }
 
+// --- ADD TO TEAM ---
 function addToTeam(pokemon: PokemonDetail) {
   if (team.length >= 6) return alert("Équipe complète (6 Pokémon max)");
   if (team.find((p) => p.id === pokemon.id))
@@ -120,8 +137,11 @@ function addToTeam(pokemon: PokemonDetail) {
   renderTeam();
 }
 
+// --- INIT ---
 async function init() {
+  await loadTeam(true); // 👈 Auto load au démarrage
   await loadGeneration(parseInt(genSelect.value));
+
   searchInput.addEventListener("input", () => {
     clearTimeout(timeout);
     timeout = window.setTimeout(async () => {
@@ -159,9 +179,9 @@ async function init() {
   });
 
   saveTeamBtn.addEventListener("click", saveTeam);
-  loadTeamBtn.addEventListener("click", loadTeam);
+  loadTeamBtn.addEventListener("click", () => loadTeam(false));
 
-  // Navigation clavier pour équipe à finir
+  // Navigation clavier pour équipe
   document.addEventListener("keydown", async (e) => {
     if (!currentDetail) return;
     if (e.key === "ArrowRight") await navigatePokemon("next");
