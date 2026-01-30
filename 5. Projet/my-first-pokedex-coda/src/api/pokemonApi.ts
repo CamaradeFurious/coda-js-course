@@ -33,7 +33,6 @@ export interface PokemonDetail {
   evolution?: Evolution[];
 }
 
-
 export async function fetchPokemonByGeneration(
   genId: number
 ): Promise<PokemonListItem[]> {
@@ -78,8 +77,6 @@ async function fetchEvolutions(speciesUrl: string): Promise<Evolution[]> {
   return evolutions;
 }
 
-
-
 export async function fetchPokemonByName(
   nameOrId: string | number
 ): Promise<PokemonDetail> {
@@ -118,7 +115,6 @@ export async function fetchPokemonByName(
       data.sprites.front_shiny ||
       "",
   };
-
 
   const cryUrl = `https://play.pokemonshowdown.com/audio/cries/${data.name.toLowerCase()}.mp3`;
 
@@ -171,7 +167,6 @@ export async function fetchPokemonByName(
 
   const evolution = await fetchEvolutions(data.species.url);
 
-  
   return {
     id: data.id,
     nameFR,

@@ -295,7 +295,7 @@ h1 {
   background-color: #A8A77A; 
   color: #000; 
 }
-/*card*/
+
 .type-advantages {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

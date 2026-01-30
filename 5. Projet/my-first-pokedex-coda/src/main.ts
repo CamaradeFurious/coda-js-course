@@ -27,26 +27,27 @@ let team: PokemonDetail[] = [];
 async function loadGeneration(genId: number) {
   const list = await fetchPokemonByGeneration(genId);
 
+  allPokemon = await Promise.all(
+    list.map(async (p) => {
+      const detail = await fetchPokemonByName(p.name);
+      return {
+        ...p,
+        id: detail.id,
+        nameFR: detail.nameFR,
+        sprites: detail.sprites,
+        types: detail.types,
+      };
+    })
+  );
 
-allPokemon = await Promise.all(
-  list.map(async p => {
-    const detail = await fetchPokemonByName(p.name);
-    return {
-      ...p,
-      id: detail.id,
-      nameFR: detail.nameFR,   
-      sprites: detail.sprites,
-      types: detail.types
-    };
-  })
-);
+  allPokemon.sort((a, b) => (a.id || 0) - (b.id || 0));
 
-
-allPokemon.sort((a, b) => (a.id || 0) - (b.id || 0));
-
-
-await renderPokemonList(listContainer, allPokemon, detailContainer, shinySelect.value === "true");
-
+  await renderPokemonList(
+    listContainer,
+    allPokemon,
+    detailContainer,
+    shinySelect.value === "true"
+  );
 }
 
 async function showPokemonDetail(pokemon: PokemonDetail) {
@@ -120,30 +121,26 @@ function addToTeam(pokemon: PokemonDetail) {
 
 async function init() {
   await loadGeneration(parseInt(genSelect.value));
-searchInput.addEventListener("input", () => {
-  clearTimeout(timeout);
-  timeout = window.setTimeout(async () => {
-    const search = searchInput.value.toLowerCase().trim();
+  searchInput.addEventListener("input", () => {
+    clearTimeout(timeout);
+    timeout = window.setTimeout(async () => {
+      const search = searchInput.value.toLowerCase().trim();
 
-    const filtered = allPokemon.filter((p) => {
-      const french = (p.nameFR || "").toLowerCase(); 
-      const idStr = p.id ? p.id.toString() : "";
+      const filtered = allPokemon.filter((p) => {
+        const french = (p.nameFR || "").toLowerCase();
+        const idStr = p.id ? p.id.toString() : "";
 
-      return (
-        french.includes(search) || 
-        idStr === search           
+        return french.includes(search) || idStr === search;
+      });
+
+      await renderPokemonList(
+        listContainer,
+        filtered,
+        detailContainer,
+        shinySelect.value === "true"
       );
-    });
-
-    await renderPokemonList(
-      listContainer,
-      filtered,
-      detailContainer,
-      shinySelect.value === "true"
-    );
-  }, 400); 
-});
-
+    }, 400);
+  });
 
   genSelect.addEventListener("change", async () => {
     await loadGeneration(parseInt(genSelect.value));
